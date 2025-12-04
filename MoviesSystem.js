@@ -3,6 +3,7 @@ const app = express();
 const path = require("path");
 const bodyParser = require("body-parser");
 const { MongoClient, ServerApiVersion } = require("mongodb");
+const { name } = require("ejs");
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.set("view engine", "ejs");
@@ -21,7 +22,7 @@ const uri = process.env.MONGO_CONNECTION_STRING;
 const client = new MongoClient(uri, { serverApi: ServerApiVersion.v1 });
 
 app.get("/", async (req, res) => {
-   const variables = { year: 2025 };
+   const variables = { name: "Alex Tamagno" };
    res.render("index", variables);
 });
 
@@ -88,3 +89,4 @@ app.listen(PORT, () => {
    console.log(`Server running on port ${PORT}`);
    console.log(`Main URL (local testing) http://localhost:${PORT}/`);
 });
+
